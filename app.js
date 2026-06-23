@@ -4,43 +4,44 @@
 
 // --- STATE MANAGEMENT ---
 let currentSlide = 1;
-const totalSlides = 34;
+const totalSlides = 35;
 
 const slideMetadata = {
   1: { badge: "PHẦN MỞ ĐẦU • SLIDE 1", title: "Vệ sinh cơ thể tuổi dậy thì" },
-  2: { badge: "PHẦN MỞ ĐẦU • SLIDE 2", title: "Mục tiêu cần đạt" },
-  3: { badge: "KHỞI ĐỘNG • SLIDE 3", title: "Khởi động" },
-  4: { badge: "KHỞI ĐỘNG • SLIDE 4", title: "Chuẩn bị" },
-  5: { badge: "KHỞI ĐỘNG • SLIDE 5", title: "Hướng dẫn" },
-  6: { badge: "KHỞI ĐỘNG • SLIDE 6", title: "Tìm nguyên nhân gây ra các triệu chứng" },
-  7: { badge: "KHỞI ĐỘNG • SLIDE 7", title: "Kết quả đối chiếu lâm sàng" },
-  8: { badge: "KHỞI ĐỘNG • SLIDE 8", title: "Chúc mừng vượt qua vòng sơ tuyển" },
-  9: { badge: "HOẠT ĐỘNG 1 • SLIDE 9", title: "Thử thách 2 (Intro)" },
-  10: { badge: "HOẠT ĐỘNG 1 • SLIDE 10", title: "Tiếp nhận hồ sơ bệnh án mới" },
-  11: { badge: "HOẠT ĐỘNG 1 • SLIDE 11", title: "Quy trình khám bệnh" },
-  12: { badge: "HOẠT ĐỘNG 1 • SLIDE 12", title: "Thảo luận nhóm" },
-  13: { badge: "HOẠT ĐỘNG 1 • SLIDE 13", title: "Chuẩn bị trình bày" },
-  14: { badge: "HOẠT ĐỘNG 1 • SLIDE 14", title: "Đáp án hội chẩn" },
-  15: { badge: "HOẠT ĐỘNG 1 • SLIDE 15", title: "Phê duyệt bệnh án" },
-  16: { badge: "HOẠT ĐỘNG 2 • SLIDE 16", title: "Thử thách 3 (Intro)" },
-  17: { badge: "HOẠT ĐỘNG 2 • SLIDE 17", title: "Thiết bị giải mã" },
-  18: { badge: "HOẠT ĐỘNG 2 • SLIDE 18", title: "Luật chơi tìm chữ" },
-  19: { badge: "HOẠT ĐỘNG 2 • SLIDE 19", title: "Giải mã từ khóa" },
-  20: { badge: "HOẠT ĐỘNG 2 • SLIDE 20", title: "3 từ khoá đúng" },
-  21: { badge: "HOẠT ĐỘNG 2 • SLIDE 21", title: "Giải thích cơ chế" },
-  22: { badge: "HOẠT ĐỘNG 2 • SLIDE 22", title: "Chúc mừng" },
-  23: { badge: "HOẠT ĐỘNG 3 • SLIDE 23", title: "Thực hành lâm sàng" },
-  24: { badge: "HOẠT ĐỘNG 3 • SLIDE 24", title: "Chuẩn bị kê đơn" },
-  25: { badge: "HOẠT ĐỘNG 3 • SLIDE 25", title: "Quy chế kê đơn" },
-  26: { badge: "HOẠT ĐỘNG 3 • SLIDE 26", title: "Trình duyệt đơn thuốc" },
-  27: { badge: "HOẠT ĐỘNG 3 • SLIDE 27", title: "Đáp án tắm rửa" },
-  28: { badge: "HOẠT ĐỘNG 3 • SLIDE 28", title: "Quy trình làm sạch" },
-  29: { badge: "HOẠT ĐỘNG 4 • SLIDE 29", title: "Nên làm gì để sạch sẽ" },
-  30: { badge: "HOẠT ĐỘNG 4 • SLIDE 30", title: "Chuẩn bị T-Chart" },
-  31: { badge: "HOẠT ĐỘNG 4 • SLIDE 31", title: "Quy chế thi" },
-  32: { badge: "HOẠT ĐỘNG 4 • SLIDE 32", title: "Phân loại Nên/Không nên" },
-  33: { badge: "HOẠT ĐỘNG 4 • SLIDE 33", title: "Nghi thức sắc phong" },
-  34: { badge: "HOẠT ĐỘNG 4 • SLIDE 34", title: "Quy trình tắm đúng cách" }
+  2: { badge: "PHẦN MỞ ĐẦU • SLIDE 2", title: "Câu hỏi lớn của bài học" },
+  3: { badge: "PHẦN MỞ ĐẦU • SLIDE 3", title: "Mục tiêu cần đạt" },
+  4: { badge: "KHỞI ĐỘNG • SLIDE 4", title: "Khởi động" },
+  5: { badge: "KHỞI ĐỘNG • SLIDE 5", title: "Chuẩn bị" },
+  6: { badge: "KHỞI ĐỘNG • SLIDE 6", title: "Hướng dẫn" },
+  7: { badge: "KHỞI ĐỘNG • SLIDE 7", title: "Tìm nguyên nhân gây ra các triệu chứng" },
+  8: { badge: "KHỞI ĐỘNG • SLIDE 8", title: "Kết quả đối chiếu lâm sàng" },
+  9: { badge: "KHỞI ĐỘNG • SLIDE 9", title: "Chúc mừng vượt qua vòng sơ tuyển" },
+  10: { badge: "HOẠT ĐỘNG 1 • SLIDE 10", title: "Thử thách 2 (Intro)" },
+  11: { badge: "HOẠT ĐỘNG 1 • SLIDE 11", title: "Tiếp nhận hồ sơ bệnh án mới" },
+  12: { badge: "HOẠT ĐỘNG 1 • SLIDE 12", title: "Quy trình khám bệnh" },
+  13: { badge: "HOẠT ĐỘNG 1 • SLIDE 13", title: "Thảo luận nhóm" },
+  14: { badge: "HOẠT ĐỘNG 1 • SLIDE 14", title: "Chuẩn bị trình bày" },
+  15: { badge: "HOẠT ĐỘNG 1 • SLIDE 15", title: "Đáp án hội chẩn" },
+  16: { badge: "HOẠT ĐỘNG 1 • SLIDE 16", title: "Phê duyệt bệnh án" },
+  17: { badge: "HOẠT ĐỘNG 2 • SLIDE 17", title: "Thử thách 3 (Intro)" },
+  18: { badge: "HOẠT ĐỘNG 2 • SLIDE 18", title: "Thiết bị giải mã" },
+  19: { badge: "HOẠT ĐỘNG 2 • SLIDE 19", title: "Luật chơi tìm chữ" },
+  20: { badge: "HOẠT ĐỘNG 2 • SLIDE 20", title: "Giải mã từ khóa" },
+  21: { badge: "HOẠT ĐỘNG 2 • SLIDE 21", title: "3 từ khoá đúng" },
+  22: { badge: "HOẠT ĐỘNG 2 • SLIDE 22", title: "Giải thích cơ chế" },
+  23: { badge: "HOẠT ĐỘNG 2 • SLIDE 23", title: "Chúc mừng" },
+  24: { badge: "HOẠT ĐỘNG 3 • SLIDE 24", title: "Thực hành lâm sàng" },
+  25: { badge: "HOẠT ĐỘNG 3 • SLIDE 25", title: "Chuẩn bị kê đơn" },
+  26: { badge: "HOẠT ĐỘNG 3 • SLIDE 26", title: "Quy chế kê đơn" },
+  27: { badge: "HOẠT ĐỘNG 3 • SLIDE 27", title: "Trình duyệt đơn thuốc" },
+  28: { badge: "HOẠT ĐỘNG 3 • SLIDE 28", title: "Đáp án tắm rửa" },
+  29: { badge: "HOẠT ĐỘNG 3 • SLIDE 29", title: "Quy trình làm sạch" },
+  30: { badge: "HOẠT ĐỘNG 4 • SLIDE 30", title: "Nên làm gì để sạch sẽ" },
+  31: { badge: "HOẠT ĐỘNG 4 • SLIDE 31", title: "Chuẩn bị T-Chart" },
+  32: { badge: "HOẠT ĐỘNG 4 • SLIDE 32", title: "Quy chế thi" },
+  33: { badge: "HOẠT ĐỘNG 4 • SLIDE 33", title: "Phân loại Nên/Không nên" },
+  34: { badge: "HOẠT ĐỘNG 4 • SLIDE 34", title: "Nghi thức sắc phong" },
+  35: { badge: "HOẠT ĐỘNG 4 • SLIDE 35", title: "Quy trình tắm đúng cách" }
 };
 
 // --- SLIDE CONTROLLER ---
@@ -79,25 +80,25 @@ function navigateToSlide(slideNum) {
   // Update header role badge based on thăng cấp progression
   const roleBadge = document.getElementById('header-role-badge');
   if (roleBadge) {
-    if (slideNum >= 1 && slideNum <= 2) {
+    if (slideNum >= 1 && slideNum <= 3) {
       roleBadge.innerText = "Bác sĩ Lâm sàng";
-    } else if (slideNum >= 3 && slideNum <= 8) {
+    } else if (slideNum >= 4 && slideNum <= 9) {
       roleBadge.innerText = "Bác sĩ Thực tập";
-    } else if (slideNum >= 9 && slideNum <= 15) {
+    } else if (slideNum >= 10 && slideNum <= 16) {
       roleBadge.innerText = "Bác sĩ Nội trú";
-    } else if (slideNum >= 16 && slideNum <= 28) {
+    } else if (slideNum >= 17 && slideNum <= 29) {
       roleBadge.innerText = "Bác sĩ chính";
-    } else if (slideNum >= 29 && slideNum <= 34) {
+    } else if (slideNum >= 30 && slideNum <= 35) {
       roleBadge.innerText = "Bác sĩ chuyên khoa";
     }
   }
 
   // Slide-specific initializations
-  if (slideNum === 10) {
+  if (slideNum === 11) {
     resetShufflerState();
-  } else if (slideNum === 19) {
+  } else if (slideNum === 20) {
     initHangmanGame();
-  } else if (slideNum === 27) {
+  } else if (slideNum === 28) {
     initBathingGame();
   } else if (slideNum === 32) {
     initTChartGame();
