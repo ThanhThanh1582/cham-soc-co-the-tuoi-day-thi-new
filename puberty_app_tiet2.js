@@ -971,7 +971,7 @@ function stampDoctorCommitment() {
 window.stampDoctorCommitment = stampDoctorCommitment;
 
 // --- CONFETTI CANVAS PARTICLES SYSTEM ---
-const confettiCanvas = document.getElementById('confetti-canvas');
+let confettiCanvas = null;
 let confettiCtx = null;
 let confettiParticles = [];
 let confettiActive = false;
@@ -985,10 +985,10 @@ function resizeConfettiCanvas() {
 
 class ConfettiParticle {
   constructor() {
-    this.x = Math.random() * (confettiCanvas ? confettiCanvas.width : 800);
-    this.y = Math.random() * (confettiCanvas ? confettiCanvas.height : 600) - (confettiCanvas ? confettiCanvas.height : 600);
+    this.x = Math.random() * (confettiCanvas ? confettiCanvas.width : window.innerWidth);
+    this.y = Math.random() * (confettiCanvas ? confettiCanvas.height : window.innerHeight) - (confettiCanvas ? confettiCanvas.height : window.innerHeight);
     this.r = Math.random() * 6 + 4;
-    this.d = Math.random() * (confettiCanvas ? confettiCanvas.height : 600);
+    this.d = Math.random() * (confettiCanvas ? confettiCanvas.height : window.innerHeight);
     this.color = `hsl(${Math.random() * 360}, 90%, 65%)`;
     this.tilt = Math.random() * 10 - 5;
     this.tiltAngleIncremental = Math.random() * 0.07 + 0.02;
@@ -1010,7 +1010,7 @@ class ConfettiParticle {
     this.y += (Math.cos(this.d) + 3 + this.r / 2) / 2;
     this.x += Math.sin(this.tiltAngle);
     this.tilt = Math.sin(this.tiltAngle - this.r / 2) * 5;
-    return this.y < (confettiCanvas ? confettiCanvas.height : 600);
+    return this.y < (confettiCanvas ? confettiCanvas.height : window.innerHeight);
   }
 }
 
@@ -1033,6 +1033,9 @@ function updateConfetti() {
 }
 
 function startConfetti() {
+  if (!confettiCanvas) {
+    confettiCanvas = document.getElementById('confetti-canvas');
+  }
   if (!confettiCanvas) return;
   confettiCtx = confettiCanvas.getContext('2d');
   window.addEventListener('resize', resizeConfettiCanvas);

@@ -791,29 +791,34 @@ window.applyCertifiedStamp = applyCertifiedStamp;
 
 // --- CONFETTI CANVAS PARTICLES SYSTEM ---
 let confettiCanvas = document.getElementById('confetti-canvas');
-let confettiCtx = confettiCanvas.getContext('2d');
+let confettiCtx = confettiCanvas ? confettiCanvas.getContext('2d') : null;
 let confettiParticles = [];
 let confettiActive = false;
 
 function resizeConfettiCanvas() {
-  confettiCanvas.width = window.innerWidth;
-  confettiCanvas.height = window.innerHeight;
+  if (confettiCanvas) {
+    confettiCanvas.width = window.innerWidth;
+    confettiCanvas.height = window.innerHeight;
+  }
 }
 window.addEventListener('resize', resizeConfettiCanvas);
-resizeConfettiCanvas();
+if (confettiCanvas) {
+  resizeConfettiCanvas();
+}
 
 class ConfettiParticle {
   constructor() {
-    this.x = Math.random() * confettiCanvas.width;
-    this.y = Math.random() * confettiCanvas.height - confettiCanvas.height;
+    this.x = Math.random() * (confettiCanvas ? confettiCanvas.width : window.innerWidth);
+    this.y = Math.random() * (confettiCanvas ? confettiCanvas.height : window.innerHeight) - (confettiCanvas ? confettiCanvas.height : window.innerHeight);
     this.r = Math.random() * 6 + 4;
-    this.d = Math.random() * confettiCanvas.height;
+    this.d = Math.random() * (confettiCanvas ? confettiCanvas.height : window.innerHeight);
     this.color = `hsl(${Math.random() * 360}, 100%, 50%)`;
     this.tilt = Math.random() * 10 - 5;
     this.tiltAngleChan = Math.random() * 0.05 + 0.01;
     this.tiltAngle = 0;
   }
   draw() {
+    if (!confettiCtx) return;
     confettiCtx.beginPath();
     confettiCtx.lineWidth = this.r;
     confettiCtx.strokeStyle = this.color;
@@ -825,7 +830,9 @@ class ConfettiParticle {
 
 function updateConfetti() {
   if (!confettiActive && confettiParticles.length === 0) return;
-  confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+  if (confettiCtx && confettiCanvas) {
+    confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+  }
   
   if (confettiActive && confettiParticles.length < 150) {
     confettiParticles.push(new ConfettiParticle());
@@ -837,7 +844,7 @@ function updateConfetti() {
     p.y += (Math.cos(p.d) + 3 + p.r / 2) / 2;
     p.tilt = Math.sin(p.tiltAngle - i / 3) * 15;
     
-    if (p.y > confettiCanvas.height) {
+    if (confettiCanvas && p.y > confettiCanvas.height) {
       if (confettiActive) {
         confettiParticles[i] = new ConfettiParticle();
       } else {
@@ -852,6 +859,7 @@ function updateConfetti() {
 }
 
 function startConfetti() {
+  if (!confettiCanvas || !confettiCtx) return;
   confettiActive = true;
   updateConfetti();
   setTimeout(() => { confettiActive = false; }, 4000);
