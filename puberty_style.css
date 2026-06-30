@@ -4614,3 +4614,48 @@ body {
 .guide-slide .slide-header .slide-title {
   font-size: 34pt !important;
 }
+
+
+/* ==========================================================================
+   LAYOUT SAFETY: PREVENT SLIDE OVERFLOW (Fix lech man hinh)
+   ========================================================================== */
+/* Ensure no horizontal overflow at any level */
+body, .app-container, .main-content, .slides-viewport {
+  overflow-x: hidden !important;
+  max-width: 100vw;
+}
+
+/* Ensure .slide sections never overflow their parent */
+section.slide {
+  overflow-x: hidden !important;
+  box-sizing: border-box !important;
+  max-width: 100% !important;
+}
+
+/* Constrain slide-frame so max-width never exceeds available viewport */
+.slide-frame {
+  box-sizing: border-box !important;
+  max-width: min(var(--slide-frame-max, 1100px), 100%) !important;
+  overflow-x: hidden !important;
+}
+
+/* Mystery layout responsive: collapse to 1 column on narrow viewports */
+.mystery-layout,
+.grid-2col {
+  box-sizing: border-box !important;
+  overflow-x: hidden !important;
+}
+
+/* Slide content: word-wrap so long answers don't push width */
+.answer-text,
+.slide-frame p,
+.slide-frame li,
+.slide-frame td,
+.slide-frame th,
+.slide-frame h1,
+.slide-frame h2,
+.slide-frame h3,
+.slide-frame h4 {
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+}

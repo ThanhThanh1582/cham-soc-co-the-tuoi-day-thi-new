@@ -18,11 +18,12 @@
       background-position: center;
       background-attachment: fixed;
       position: relative;
-      overflow-x: hidden;
+      overflow: hidden;
       margin: 0;
       padding: 0;
       height: 100vh;
       width: 100vw;
+      max-width: 100vw;
     }
     body::before {
       content: '';
@@ -40,6 +41,30 @@
     .app-container {
       position: relative;
       z-index: 5;
+      overflow: hidden;
+      max-width: 100vw;
+    }
+    
+    /* Safety: prevent slide-frame from overflowing its container */
+    .slide-layout {
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+    .slide-frame {
+      box-sizing: border-box;
+      overflow-x: hidden;
+    }
+    
+    /* Responsive mystery layout - prevent overflow on smaller screens */
+    .mystery-layout {
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+    @media (max-width: 1100px) {
+      .mystery-layout {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+      }
     }
     
     /* Design Guidelines slide typography specifications */
@@ -318,12 +343,12 @@
             <div class="slide-frame" style="max-width: 1100px; width: 100%;">
 
             <div class="cover-layout" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; text-align: center;">
-                <div class="badge-red" style="padding: 6px 14px; border-radius: 12px; font-size: 16pt !important font-weight: 900; background: rgba(6, 182, 212, 0.15); border: 1.5px solid var(--cyan); color: var(--cyan); text-transform: uppercase;">🚀 TRÒ CHƠI KHỞI ĐỘNG</div>
+                <div class="badge-red" style="padding: 6px 14px; border-radius: 12px; font-size: 16pt !important; font-weight: 900; background: rgba(6, 182, 212, 0.15); border: 1.5px solid var(--cyan); color: var(--cyan); text-transform: uppercase;">🚀 TRÒ CHƠI KHỞI ĐỘNG</div>
                 <h1 class="main-title">HOẠT ĐỘNG 1: MỞ KHÓA NHIỆM VỤ TỔNG LỰC</h1>
                 <h2 class="sub-title">Trò chơi: "Nhìn hình đoán chữ"</h2>
                 
                 <div class="big-question-card glass-panel" style="max-width: 800px; margin: 20px auto; padding: 25px; border-radius: 12px; border: 1.5px solid var(--glass-border); background: var(--glass-bg);">
-                    <p class="question-text" style="font-size: 24pt !important color: #FFF; font-weight: 700; line-height: 1.6;">
+                    <p class="question-text" style="font-size: 24pt !important; color: #FFF; font-weight: 700; line-height: 1.6;">
                         "Giải mã thành công 6 bức ảnh để mở khóa chiến dịch sức khỏe học đường!"
                     </p>
                 </div>
@@ -361,8 +386,8 @@
                         </div>
                     </div>
                     <div class="answer-box glass-panel blurred" id="ans-s2" style="padding: 25px; border-radius: 12px; border: 2px dashed var(--glass-border); text-align: center; margin-bottom: 20px;">
-                        <h4 style="color: var(--text-muted); font-size: 16pt !important margin-bottom: 8px; text-transform: uppercase;">Đáp án đúng</h4>
-                        <div class="answer-text" style="font-size: 28pt !important font-weight: 900; color: var(--cyan); transition: all 0.3s;">TẮM SẠCH SẼ</div>
+                        <h4 style="color: var(--text-muted); font-size: 16pt !important; margin-bottom: 8px; text-transform: uppercase;">Đáp án đúng</h4>
+                        <div class="answer-text" style="font-size: 28pt !important; font-weight: 900; color: var(--cyan); transition: all 0.3s;">TẮM SẠCH SẼ</div>
                     </div>
                     <div style="display: flex; gap: 15px;">
                         <button class="btn btn-reveal" onclick="revealAnswer(2)" style="flex: 1; padding: 12px; font-weight: 800;"><i class="fa-solid fa-unlock-keyhole"></i> HIỆN ĐÁP ÁN</button>
@@ -399,8 +424,8 @@
                         </div>
                     </div>
                     <div class="answer-box glass-panel blurred" id="ans-s3" style="padding: 25px; border-radius: 12px; border: 2px dashed var(--glass-border); text-align: center; margin-bottom: 20px;">
-                        <h4 style="color: var(--text-muted); font-size: 16pt !important margin-bottom: 8px; text-transform: uppercase;">Đáp án đúng</h4>
-                        <div class="answer-text" style="font-size: 28pt !important font-weight: 900; color: var(--cyan); transition: all 0.3s;">DÙNG SỮA RỬA MẶT DỊU NHẸ</div>
+                        <h4 style="color: var(--text-muted); font-size: 16pt !important; margin-bottom: 8px; text-transform: uppercase;">Đáp án đúng</h4>
+                        <div class="answer-text" style="font-size: 28pt !important; font-weight: 900; color: var(--cyan); transition: all 0.3s;">DÙNG SỮA RỬA MẶT DỊU NHẸ</div>
                     </div>
                     <div style="display: flex; gap: 15px;">
                         <button class="btn btn-reveal" onclick="revealAnswer(3)" style="flex: 1; padding: 12px; font-weight: 800;"><i class="fa-solid fa-unlock-keyhole"></i> HIỆN ĐÁP ÁN</button>
@@ -437,8 +462,8 @@
                         </div>
                     </div>
                     <div class="answer-box glass-panel blurred" id="ans-s4" style="padding: 25px; border-radius: 12px; border: 2px dashed var(--glass-border); text-align: center; margin-bottom: 20px;">
-                        <h4 style="color: var(--text-muted); font-size: 16pt !important margin-bottom: 8px; text-transform: uppercase;">Đáp án đúng</h4>
-                        <div class="answer-text" style="font-size: 28pt !important font-weight: 900; color: var(--cyan); transition: all 0.3s;">KỲ CỌ VÙNG NẾP GẤP</div>
+                        <h4 style="color: var(--text-muted); font-size: 16pt !important; margin-bottom: 8px; text-transform: uppercase;">Đáp án đúng</h4>
+                        <div class="answer-text" style="font-size: 28pt !important; font-weight: 900; color: var(--cyan); transition: all 0.3s;">KỲ CỌ VÙNG NẾP GẤP</div>
                     </div>
                     <div style="display: flex; gap: 15px;">
                         <button class="btn btn-reveal" onclick="revealAnswer(4)" style="flex: 1; padding: 12px; font-weight: 800;"><i class="fa-solid fa-unlock-keyhole"></i> HIỆN ĐÁP ÁN</button>
@@ -475,8 +500,8 @@
                         </div>
                     </div>
                     <div class="answer-box glass-panel blurred" id="ans-s5" style="padding: 25px; border-radius: 12px; border: 2px dashed var(--glass-border); text-align: center; margin-bottom: 20px;">
-                        <h4 style="color: var(--text-muted); font-size: 16pt !important margin-bottom: 8px; text-transform: uppercase;">Đáp án đúng</h4>
-                        <div class="answer-text" style="font-size: 28pt !important font-weight: 900; color: var(--cyan); transition: all 0.3s;">THAY TẤT, QUẦN ÁO LÓT HÀNG NGÀY</div>
+                        <h4 style="color: var(--text-muted); font-size: 16pt !important; margin-bottom: 8px; text-transform: uppercase;">Đáp án đúng</h4>
+                        <div class="answer-text" style="font-size: 28pt !important; font-weight: 900; color: var(--cyan); transition: all 0.3s;">THAY TẤT, QUẦN ÁO LÓT HÀNG NGÀY</div>
                     </div>
                     <div style="display: flex; gap: 15px;">
                         <button class="btn btn-reveal" onclick="revealAnswer(5)" style="flex: 1; padding: 12px; font-weight: 800;"><i class="fa-solid fa-unlock-keyhole"></i> HIỆN ĐÁP ÁN</button>
@@ -513,8 +538,8 @@
                         </div>
                     </div>
                     <div class="answer-box glass-panel blurred" id="ans-s6" style="padding: 25px; border-radius: 12px; border: 2px dashed var(--glass-border); text-align: center; margin-bottom: 20px;">
-                        <h4 style="color: var(--text-muted); font-size: 16pt !important margin-bottom: 8px; text-transform: uppercase;">Đáp án đúng</h4>
-                        <div class="answer-text" style="font-size: 28pt !important font-weight: 900; color: var(--cyan); transition: all 0.3s;">GỘI ĐẦU SẠCH SẼ</div>
+                        <h4 style="color: var(--text-muted); font-size: 16pt !important; margin-bottom: 8px; text-transform: uppercase;">Đáp án đúng</h4>
+                        <div class="answer-text" style="font-size: 28pt !important; font-weight: 900; color: var(--cyan); transition: all 0.3s;">GỘI ĐẦU SẠCH SẼ</div>
                     </div>
                     <div style="display: flex; gap: 15px;">
                         <button class="btn btn-reveal" onclick="revealAnswer(6)" style="flex: 1; padding: 12px; font-weight: 800;"><i class="fa-solid fa-unlock-keyhole"></i> HIỆN ĐÁP ÁN</button>
@@ -551,8 +576,8 @@
                         </div>
                     </div>
                     <div class="answer-box glass-panel blurred" id="ans-s7" style="padding: 25px; border-radius: 12px; border: 2px dashed var(--glass-border); text-align: center; margin-bottom: 20px;">
-                        <h4 style="color: var(--text-muted); font-size: 16pt !important margin-bottom: 8px; text-transform: uppercase;">Đáp án đúng</h4>
-                        <div class="answer-text" style="font-size: 28pt !important font-weight: 900; color: var(--cyan); transition: all 0.3s;">RỬA TAY SẠCH SẼ BẰNG XÀ PHÒNG</div>
+                        <h4 style="color: var(--text-muted); font-size: 16pt !important; margin-bottom: 8px; text-transform: uppercase;">Đáp án đúng</h4>
+                        <div class="answer-text" style="font-size: 28pt !important; font-weight: 900; color: var(--cyan); transition: all 0.3s;">RỬA TAY SẠCH SẼ BẰNG XÀ PHÒNG</div>
                     </div>
                     <div style="display: flex; gap: 15px;">
                         <button class="btn btn-reveal" onclick="revealAnswer(7)" style="flex: 1; padding: 12px; font-weight: 800;"><i class="fa-solid fa-unlock-keyhole"></i> HIỆN ĐÁP ÁN</button>
@@ -576,16 +601,16 @@
             </div>
             <div class="summary-cards" style="display: flex; flex-direction: column; gap: 20px; margin-top: 30px;">
                 <div class="glass-panel" style="padding: 20px 30px; border-radius: 12px; border-left: 6px solid var(--neon-mint); background: rgba(16, 185, 129, 0.05); display: flex; align-items: center; gap: 20px;">
-                    <div style="font-size: 28pt !important color: var(--neon-mint);"><i class="fa-solid fa-circle-check"></i></div>
-                    <div style="font-size: 24pt !important font-weight: 700; color: #FFF;">Rửa mặt bằng sữa rửa mặt dịu nhẹ (2 lần/ngày).</div>
+                    <div style="font-size: 28pt !important; color: var(--neon-mint);"><i class="fa-solid fa-circle-check"></i></div>
+                    <div style="font-size: 24pt !important; font-weight: 700; color: #FFF;">Rửa mặt bằng sữa rửa mặt dịu nhẹ (2 lần/ngày).</div>
                 </div>
                 <div class="glass-panel" style="padding: 20px 30px; border-radius: 12px; border-left: 6px solid var(--neon-mint); background: rgba(16, 185, 129, 0.05); display: flex; align-items: center; gap: 20px;">
-                    <div style="font-size: 28pt !important color: var(--neon-mint);"><i class="fa-solid fa-circle-check"></i></div>
-                    <div style="font-size: 24pt !important font-weight: 700; color: #FFF;">Tắm rửa sạch sẽ toàn thân mỗi ngày.</div>
+                    <div style="font-size: 28pt !important; color: var(--neon-mint);"><i class="fa-solid fa-circle-check"></i></div>
+                    <div style="font-size: 24pt !important; font-weight: 700; color: #FFF;">Tắm rửa sạch sẽ toàn thân mỗi ngày.</div>
                 </div>
                 <div class="glass-panel" style="padding: 20px 30px; border-radius: 12px; border-left: 6px solid var(--neon-mint); background: rgba(16, 185, 129, 0.05); display: flex; align-items: center; gap: 20px;">
-                    <div style="font-size: 28pt !important color: var(--neon-mint);"><i class="fa-solid fa-circle-check"></i></div>
-                    <div style="font-size: 24pt !important font-weight: 700; color: #FFF;">Thay quần áo, tất chân và đồ lót hằng ngày.</div>
+                    <div style="font-size: 28pt !important; color: var(--neon-mint);"><i class="fa-solid fa-circle-check"></i></div>
+                    <div style="font-size: 24pt !important; font-weight: 700; color: #FFF;">Thay quần áo, tất chân và đồ lót hằng ngày.</div>
                 </div>
             </div>
             <div style="text-align: center; margin-top: 35px;">
@@ -606,11 +631,11 @@
                 <h2 class="sub-title" style="color: #FFF !important; margin-bottom: 30px;">Hội đồng Giám định đã sẵn sàng truyền thông</h2>
                 
                 <div class="unlock-zone" style="margin: 30px 0;">
-                    <button class="btn btn-cyan btn-lg btn-pulse" id="unlock-mission-btn" onclick="celebrateAndUnlock()" style="font-size: 28pt !important padding: 25px 50px; border-radius: 50px; font-weight: 900; background: var(--cyan); color: #000; box-shadow: 0 0 35px var(--cyan-glow);">
+                    <button class="btn btn-cyan btn-lg btn-pulse" id="unlock-mission-btn" onclick="celebrateAndUnlock()" style="font-size: 28pt !important; padding: 25px 50px; border-radius: 50px; font-weight: 900; background: var(--cyan); color: #000; box-shadow: 0 0 35px var(--cyan-glow);">
                         📢 ẤN ĐỂ MỞ KHÓA NHIỆM VỤ
                     </button>
                 </div>
-                <div class="unlock-indicator" style="font-size: 22pt !important color: var(--text-muted); font-weight: 800;">(Hãy bấm nút để kích nổ pháo hoa chào mừng và mở khóa nhiệm vụ!)</div>
+                <div class="unlock-indicator" style="font-size: 22pt !important; color: var(--text-muted); font-weight: 800;">(Hãy bấm nút để kích nổ pháo hoa chào mừng và mở khóa nhiệm vụ!)</div>
             </div>
         
             </div>
@@ -627,19 +652,19 @@
                 <h2 class="slide-title">NHIỆM VỤ TRUYỀN THÔNG CỘNG ĐỒNG</h2>
             </div>
             <div class="glass-panel" style="padding: 40px; border-radius: 16px; border: 2px solid var(--cosmic-pink); background: rgba(255, 0, 122, 0.03); margin-top: 30px; box-shadow: 0 0 30px rgba(255, 0, 122, 0.1);">
-                <div style="font-size: 46pt !important color: var(--cosmic-pink); text-align: center; margin-bottom: 20px;"><i class="fa-solid fa-bullhorn animate-pulse"></i></div>
-                <div style="font-size: 28pt !important font-weight: 900; color: #FFF; text-align: center; line-height: 1.6; text-transform: uppercase;">
+                <div style="font-size: 46pt !important; color: var(--cosmic-pink); text-align: center; margin-bottom: 20px;"><i class="fa-solid fa-bullhorn animate-pulse"></i></div>
+                <div style="font-size: 28pt !important; font-weight: 900; color: #FFF; text-align: center; line-height: 1.6; text-transform: uppercase;">
                     "TỔNG TIẾN CÔNG CHIẾN DỊCH TRUYỀN THÔNG SỨC KHỎE HỌC ĐƯỜNG: TUYÊN TRUYỀN CÁCH GIỮ GÌN VỆ SINH CƠ THỂ TUỔI DẬY THÌ CHO TOÀN TRƯỜNG!"
                 </div>
             </div>
             <div class="mission-details" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 25px;">
                 <div class="glass-panel" style="padding: 15px 25px; border-radius: 8px; border: 1px solid var(--glass-border);">
-                    <div style="font-size: 16pt !important color: var(--text-muted); font-weight: 800; text-transform: uppercase; margin-bottom: 5px;">👥 ĐỐI TƯỢNG (AUDIENCE)</div>
-                    <div style="font-size: 22pt !important font-weight: 700; color: var(--cyan);">Tất cả bạn bè, học sinh toàn trường Trung học</div>
+                    <div style="font-size: 16pt !important; color: var(--text-muted); font-weight: 800; text-transform: uppercase; margin-bottom: 5px;">👥 ĐỐI TƯỢNG (AUDIENCE)</div>
+                    <div style="font-size: 22pt !important; font-weight: 700; color: var(--cyan);">Tất cả bạn bè, học sinh toàn trường Trung học</div>
                 </div>
                 <div class="glass-panel" style="padding: 15px 25px; border-radius: 8px; border: 1px solid var(--glass-border);">
-                    <div style="font-size: 16pt !important color: var(--text-muted); font-weight: 800; text-transform: uppercase; margin-bottom: 5px;">🎯 MỤC TIÊU BÀI NÓI</div>
-                    <div style="font-size: 22pt !important font-weight: 700; color: var(--cyan);">Giúp bạn bè tự tin chăm sóc bản thân sạch thơm</div>
+                    <div style="font-size: 16pt !important; color: var(--text-muted); font-weight: 800; text-transform: uppercase; margin-bottom: 5px;">🎯 MỤC TIÊU BÀI NÓI</div>
+                    <div style="font-size: 22pt !important; font-weight: 700; color: var(--cyan);">Giúp bạn bè tự tin chăm sóc bản thân sạch thơm</div>
                 </div>
             </div>
             <div style="text-align: center; margin-top: 30px;">
@@ -661,8 +686,8 @@
             </div>
             <div class="timer-layout" style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px; margin-top: 20px;">
                 <div class="instructions-card glass-panel" style="padding: 30px; border-radius: 16px; border: 1.5px solid var(--glass-border); background: rgba(15, 23, 42, 0.4);">
-                    <h3 style="font-size: 28pt !important color: var(--cyan); font-weight: 800; margin-bottom: 15px;"><i class="fa-solid fa-list-check"></i> YÊU CẦU RÀ SOÁT TỜ RƠI:</h3>
-                    <div style="display: flex; flex-direction: column; gap: 15px; font-size: 24pt !important font-weight: 600; line-height: 1.5; color: #FFF;">
+                    <h3 style="font-size: 28pt !important; color: var(--cyan); font-weight: 800; margin-bottom: 15px;"><i class="fa-solid fa-list-check"></i> YÊU CẦU RÀ SOÁT TỜ RƠI:</h3>
+                    <div style="display: flex; flex-direction: column; gap: 15px; font-size: 24pt !important; font-weight: 600; line-height: 1.5; color: #FFF;">
                         <div>• Lấy sản phẩm Tờ rơi đã thiết kế ở Tiết 2 ra rà soát.</div>
                         <div>• Đảm bảo đủ thông tin y học cốt lõi (6 bước tắm khoa học, 4 lưu ý vệ sinh cơ thể).</div>
                         <div>• Đảm bảo không có sai sót hay lệch lạc kiến thức khoa học định lượng.</div>
@@ -679,8 +704,8 @@
                         </div>
                     </div>
                     <div class="action-card glass-panel" style="padding: 20px; border-radius: 12px; border: 1px solid var(--glass-border); text-align: center; margin-bottom: 15px; background: rgba(6, 182, 212, 0.02);">
-                        <span style="font-size: 22pt !important color: var(--text-muted); font-weight: 800; text-transform: uppercase;">Nhiệm vụ nhóm</span>
-                        <p style="font-size: 22pt !important font-weight: 700; color: #FFF; margin-top: 5px;">Rà soát thông điệp chuẩn xác trước khi phát hành</p>
+                        <span style="font-size: 22pt !important; color: var(--text-muted); font-weight: 800; text-transform: uppercase;">Nhiệm vụ nhóm</span>
+                        <p style="font-size: 22pt !important; font-weight: 700; color: #FFF; margin-top: 5px;">Rà soát thông điệp chuẩn xác trước khi phát hành</p>
                     </div>
                     <button class="btn btn-cyan" onclick="navigateToSlide(12)" style="padding: 12px; font-weight: 800; font-size: 22pt !important">SÁNG TẠO KHẨU HIỆU TRUYỀN THÔNG <i class="fa-solid fa-arrow-right"></i></button>
                 </div>
@@ -701,8 +726,8 @@
             </div>
             <div class="timer-layout" style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px; margin-top: 20px;">
                 <div class="instructions-card glass-panel" style="padding: 30px; border-radius: 16px; border: 1.5px solid var(--glass-border); background: rgba(15, 23, 42, 0.4);">
-                    <h3 style="font-size: 28pt !important color: var(--cyan); font-weight: 800; margin-bottom: 15px;"><i class="fa-solid fa-lightbulb"></i> NGUYÊN TẮC SLOGAN VÀNG:</h3>
-                    <div style="display: flex; flex-direction: column; gap: 15px; font-size: 24pt !important font-weight: 600; line-height: 1.5; color: #FFF;">
+                    <h3 style="font-size: 28pt !important; color: var(--cyan); font-weight: 800; margin-bottom: 15px;"><i class="fa-solid fa-lightbulb"></i> NGUYÊN TẮC SLOGAN VÀNG:</h3>
+                    <div style="display: flex; flex-direction: column; gap: 15px; font-size: 24pt !important; font-weight: 600; line-height: 1.5; color: #FFF;">
                         <div>• <strong>Ngắn gọn:</strong> Dưới 12 từ để dễ nhớ.</div>
                         <div>• <strong>Vần điệu:</strong> Có nhịp điệu dễ đọc thuộc lòng.</div>
                         <div>• <strong>Hành động:</strong> Kêu gọi ý thức giữ gìn vệ sinh sạch thơm tuổi dậy thì.</div>
@@ -720,8 +745,8 @@
                         </div>
                     </div>
                     <div class="action-card glass-panel" style="padding: 20px; border-radius: 12px; border: 1px solid var(--glass-border); text-align: center; margin-bottom: 15px; background: rgba(6, 182, 212, 0.02);">
-                        <span style="font-size: 22pt !important color: var(--text-muted); font-weight: 800; text-transform: uppercase;">Sáng tạo</span>
-                        <p style="font-size: 22pt !important font-weight: 700; color: #FFF; margin-top: 5px;">Viết slogan nhóm của bạn ra nháp ngay lập tức!</p>
+                        <span style="font-size: 22pt !important; color: var(--text-muted); font-weight: 800; text-transform: uppercase;">Sáng tạo</span>
+                        <p style="font-size: 22pt !important; font-weight: 700; color: #FFF; margin-top: 5px;">Viết slogan nhóm của bạn ra nháp ngay lập tức!</p>
                     </div>
                     <button class="btn btn-cyan" onclick="navigateToSlide(13)" style="padding: 12px; font-weight: 800; font-size: 22pt !important">XEM GỢI Ý SLOGAN ĐẮT GIÁ <i class="fa-solid fa-arrow-right"></i></button>
                 </div>
@@ -743,10 +768,10 @@
             <div class="interactive-slogan-converter" style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 30px;">
                 <div class="slogan-card glass-panel" style="padding: 30px; border-radius: 16px; border: 1.5px solid var(--glass-border); background: rgba(15, 23, 42, 0.4); display: flex; flex-direction: column; justify-content: space-between; min-height: 250px;">
                     <div>
-                        <span style="color: var(--text-muted); font-size: 16pt !important font-weight: 800; text-transform: uppercase;">CHỦ ĐỀ: CHĂM SÓC DA MẶT</span>
-                        <h4 style="font-size: 28pt !important color: #FFF; font-weight: 700; margin-top: 5px;">Mụn cám, mụn viêm trên trán cằm</h4>
+                        <span style="color: var(--text-muted); font-size: 16pt !important; font-weight: 800; text-transform: uppercase;">CHỦ ĐỀ: CHĂM SÓC DA MẶT</span>
+                        <h4 style="font-size: 28pt !important; color: #FFF; font-weight: 700; margin-top: 5px;">Mụn cám, mụn viêm trên trán cằm</h4>
                     </div>
-                    <div class="converted-result" id="res-slogan-face" style="padding: 15px; border-radius: 8px; background: rgba(6,182,212,0.08); border: 1.5px dashed var(--cyan); color: var(--cyan); font-size: 24pt !important font-weight: 900; text-align: center; opacity: 0; transform: scale(0.9); transition: all 0.3s ease;">
+                    <div class="converted-result" id="res-slogan-face" style="padding: 15px; border-radius: 8px; background: rgba(6,182,212,0.08); border: 1.5px dashed var(--cyan); color: var(--cyan); font-size: 24pt !important; font-weight: 900; text-align: center; opacity: 0; transform: scale(0.9); transition: all 0.3s ease;">
                         ✨ "Sạch khuẩn mỗi ngày — Bay ngay mụn bọc!"
                     </div>
                     <button class="btn btn-cyan" onclick="convertSlogan('face')" style="width: 100%; padding: 10px; font-weight: 800;">
@@ -756,10 +781,10 @@
                 
                 <div class="slogan-card glass-panel" style="padding: 30px; border-radius: 16px; border: 1.5px solid var(--glass-border); background: rgba(15, 23, 42, 0.4); display: flex; flex-direction: column; justify-content: space-between; min-height: 250px;">
                     <div>
-                        <span style="color: var(--text-muted); font-size: 16pt !important font-weight: 800; text-transform: uppercase;">CHỦ ĐỀ: MÙI CƠ THỂ TUỔI DẬY THÌ</span>
-                        <h4 style="font-size: 28pt !important color: #FFF; font-weight: 700; margin-top: 5px;">Mùi hôi vùng nách, chân khi vận động</h4>
+                        <span style="color: var(--text-muted); font-size: 16pt !important; font-weight: 800; text-transform: uppercase;">CHỦ ĐỀ: MÙI CƠ THỂ TUỔI DẬY THÌ</span>
+                        <h4 style="font-size: 28pt !important; color: #FFF; font-weight: 700; margin-top: 5px;">Mùi hôi vùng nách, chân khi vận động</h4>
                     </div>
-                    <div class="converted-result" id="res-slogan-body" style="padding: 15px; border-radius: 8px; background: rgba(16,185,129,0.08); border: 1.5px dashed var(--neon-mint); color: var(--neon-mint); font-size: 24pt !important font-weight: 900; text-align: center; opacity: 0; transform: scale(0.9); transition: all 0.3s ease;">
+                    <div class="converted-result" id="res-slogan-body" style="padding: 15px; border-radius: 8px; background: rgba(16,185,129,0.08); border: 1.5px dashed var(--neon-mint); color: var(--neon-mint); font-size: 24pt !important; font-weight: 900; text-align: center; opacity: 0; transform: scale(0.9); transition: all 0.3s ease;">
                         ✨ "Cơ thể sạch thơm — Tự tin bước tới!"
                     </div>
                     <button class="btn btn-reveal" onclick="convertSlogan('body')" style="width: 100%; padding: 10px; font-weight: 800; border-color: var(--neon-mint); color: var(--neon-mint);">
@@ -786,23 +811,23 @@
             </div>
             <div class="framework-grid" style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px; margin-top: 20px;">
                 <div class="glass-panel" style="padding: 25px; border-radius: 16px; border: 1.5px solid var(--glass-border); background: rgba(15, 23, 42, 0.4);">
-                    <h3 style="font-size: 22pt !important color: var(--cyan); font-weight: 800; margin-bottom: 15px;"><i class="fa-solid fa-toolbox"></i> DỤNG CỤ HỌC TẬP CẦN:</h3>
+                    <h3 style="font-size: 22pt !important; color: var(--cyan); font-weight: 800; margin-bottom: 15px;"><i class="fa-solid fa-toolbox"></i> DỤNG CỤ HỌC TẬP CẦN:</h3>
                     <div style="display: flex; gap: 20px; margin-bottom: 20px;">
                         <div class="tool-item" style="text-align: center; flex: 1; padding: 15px; border-radius: 8px; background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border);">
                             <span style="font-size: 36pt !important">📝</span>
-                            <div style="font-size: 22pt !important font-weight: 700; color: #FFF; margin-top: 5px;">Giấy nháp</div>
+                            <div style="font-size: 22pt !important; font-weight: 700; color: #FFF; margin-top: 5px;">Giấy nháp</div>
                         </div>
                         <div class="tool-item" style="text-align: center; flex: 1; padding: 15px; border-radius: 8px; background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border);">
                             <span style="font-size: 36pt !important">🖊️</span>
-                            <div style="font-size: 22pt !important font-weight: 700; color: #FFF; margin-top: 5px;">Bút viết</div>
+                            <div style="font-size: 22pt !important; font-weight: 700; color: #FFF; margin-top: 5px;">Bút viết</div>
                         </div>
                     </div>
                     <div style="font-size: 11.5pt !important; color: var(--text-muted); font-weight: 700;">(Một bạn chịu trách nhiệm ghi chép lại sườn bài viết cho cả nhóm)</div>
                 </div>
                 
                 <div class="glass-panel" style="padding: 25px; border-radius: 16px; border: 1.5px solid var(--glass-border); background: rgba(15, 23, 42, 0.4);">
-                    <h3 style="font-size: 22pt !important color: var(--cyan); font-weight: 800; margin-bottom: 15px;"><i class="fa-solid fa-rectangle-list"></i> 4 BƯỚC CẤU TRÚC BẮT BUỘC:</h3>
-                    <ol style="font-size: 24pt !important font-weight: 700; color: #FFF; display: flex; flex-direction: column; gap: 12px; padding-left: 20px;">
+                    <h3 style="font-size: 22pt !important; color: var(--cyan); font-weight: 800; margin-bottom: 15px;"><i class="fa-solid fa-rectangle-list"></i> 4 BƯỚC CẤU TRÚC BẮT BUỘC:</h3>
+                    <ol style="font-size: 24pt !important; font-weight: 700; color: #FFF; display: flex; flex-direction: column; gap: 12px; padding-left: 20px;">
                         <li>1. Giới thiệu tên nhóm, tên các thành viên.</li>
                         <li>2. Giới thiệu chủ đề chiến dịch vệ sinh cơ thể.</li>
                         <li>3. Tuyên truyền nội dung cốt lõi (6 bước tắm / lưu ý).</li>
@@ -830,35 +855,35 @@
             <div class="role-distribution-layout" style="display: flex; flex-direction: column; gap: 15px; margin-top: 25px;">
                 <div class="role-row glass-panel" style="padding: 15px 25px; border-radius: 10px; border-left: 5px solid var(--cyan); background: rgba(6,182,212,0.04); display: flex; justify-content: space-between; align-items: center;">
                     <div style="display: flex; align-items: center; gap: 15px;">
-                        <span style="font-size: 28pt !important color: var(--cyan);"><i class="fa-solid fa-user-doctor"></i></span>
+                        <span style="font-size: 28pt !important; color: var(--cyan);"><i class="fa-solid fa-user-doctor"></i></span>
                         <div>
-                            <div style="font-size: 22pt !important font-weight: 800; color: #FFF;">THÀNH VIÊN A: PHẦN 1 + PHẦN 2</div>
-                            <div style="font-size: 16pt !important color: var(--text-muted);">Mở đầu, tự tin giới thiệu nhóm & chủ đề truyền thông</div>
+                            <div style="font-size: 22pt !important; font-weight: 800; color: #FFF;">THÀNH VIÊN A: PHẦN 1 + PHẦN 2</div>
+                            <div style="font-size: 16pt !important; color: var(--text-muted);">Mở đầu, tự tin giới thiệu nhóm & chủ đề truyền thông</div>
                         </div>
                     </div>
-                    <div style="font-size: 22pt !important font-weight: 800; color: var(--cyan); background: rgba(6,182,212,0.1); padding: 4px 10px; border-radius: 4px;">VAI DIỄN 1</div>
+                    <div style="font-size: 22pt !important; font-weight: 800; color: var(--cyan); background: rgba(6,182,212,0.1); padding: 4px 10px; border-radius: 4px;">VAI DIỄN 1</div>
                 </div>
                 
                 <div class="role-row glass-panel" style="padding: 15px 25px; border-radius: 10px; border-left: 5px solid var(--amber); background: rgba(245,158,11,0.04); display: flex; justify-content: space-between; align-items: center;">
                     <div style="display: flex; align-items: center; gap: 15px;">
-                        <span style="font-size: 28pt !important color: var(--amber);"><i class="fa-solid fa-user-doctor"></i></span>
+                        <span style="font-size: 28pt !important; color: var(--amber);"><i class="fa-solid fa-user-doctor"></i></span>
                         <div>
-                            <div style="font-size: 22pt !important font-weight: 800; color: #FFF;">THÀNH VIÊN B & C: PHẦN 3</div>
-                            <div style="font-size: 16pt !important color: var(--text-muted);">Tuyên truyền sâu nội dung 6 bước tắm, thói quen sạch thơm</div>
+                            <div style="font-size: 22pt !important; font-weight: 800; color: #FFF;">THÀNH VIÊN B & C: PHẦN 3</div>
+                            <div style="font-size: 16pt !important; color: var(--text-muted);">Tuyên truyền sâu nội dung 6 bước tắm, thói quen sạch thơm</div>
                         </div>
                     </div>
-                    <div style="font-size: 22pt !important font-weight: 800; color: var(--amber); background: rgba(245,158,11,0.1); padding: 4px 10px; border-radius: 4px;">VAI DIỄN 2 + 3</div>
+                    <div style="font-size: 22pt !important; font-weight: 800; color: var(--amber); background: rgba(245,158,11,0.1); padding: 4px 10px; border-radius: 4px;">VAI DIỄN 2 + 3</div>
                 </div>
                 
                 <div class="role-row glass-panel" style="padding: 15px 25px; border-radius: 10px; border-left: 5px solid var(--cosmic-pink); background: rgba(255,0,122,0.04); display: flex; justify-content: space-between; align-items: center;">
                     <div style="display: flex; align-items: center; gap: 15px;">
-                        <span style="font-size: 28pt !important color: var(--cosmic-pink);"><i class="fa-solid fa-user-doctor"></i></span>
+                        <span style="font-size: 28pt !important; color: var(--cosmic-pink);"><i class="fa-solid fa-user-doctor"></i></span>
                         <div>
-                            <div style="font-size: 22pt !important font-weight: 800; color: #FFF;">THÀNH VIÊN D: PHẦN 4</div>
-                            <div style="font-size: 16pt !important color: var(--text-muted);">Đọc to slogan kết nối thuyết phục & chào kết thúc</div>
+                            <div style="font-size: 22pt !important; font-weight: 800; color: #FFF;">THÀNH VIÊN D: PHẦN 4</div>
+                            <div style="font-size: 16pt !important; color: var(--text-muted);">Đọc to slogan kết nối thuyết phục & chào kết thúc</div>
                         </div>
                     </div>
-                    <div style="font-size: 22pt !important font-weight: 800; color: var(--cosmic-pink); background: rgba(255,0,122,0.1); padding: 4px 10px; border-radius: 4px;">VAI DIỄN 4</div>
+                    <div style="font-size: 22pt !important; font-weight: 800; color: var(--cosmic-pink); background: rgba(255,0,122,0.1); padding: 4px 10px; border-radius: 4px;">VAI DIỄN 4</div>
                 </div>
             </div>
             <div style="text-align: center; margin-top: 30px;">
@@ -880,8 +905,8 @@
             </div>
             <div class="timer-layout" style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px; margin-top: 20px;">
                 <div class="instructions-card glass-panel" style="padding: 30px; border-radius: 16px; border: 1.5px solid var(--glass-border); background: rgba(15, 23, 42, 0.4);">
-                    <h3 style="font-size: 28pt !important color: var(--cyan); font-weight: 800; margin-bottom: 15px;"><i class="fa-solid fa-circle-exclamation"></i> LƯU Ý KHI DIỄN TẬP:</h3>
-                    <div style="display: flex; flex-direction: column; gap: 15px; font-size: 24pt !important font-weight: 600; line-height: 1.5; color: #FFF;">
+                    <h3 style="font-size: 28pt !important; color: var(--cyan); font-weight: 800; margin-bottom: 15px;"><i class="fa-solid fa-circle-exclamation"></i> LƯU Ý KHI DIỄN TẬP:</h3>
+                    <div style="display: flex; flex-direction: column; gap: 15px; font-size: 24pt !important; font-weight: 600; line-height: 1.5; color: #FFF;">
                         <div>• Đứng dậy theo nhóm, cầm tờ rơi trên tay để thuyết trình.</div>
                         <div>• Ráp thử giọng nói to rõ, tự tin, phong thái chững chạc chuyên gia.</div>
                         <div>• Nhờ bạn bè sửa tông giọng, cử chỉ cơ thể tự nhiên.</div>
@@ -898,8 +923,8 @@
                         </div>
                     </div>
                     <div class="action-card glass-panel" style="padding: 20px; border-radius: 12px; border: 1px solid var(--glass-border); text-align: center; margin-bottom: 15px; background: rgba(6, 182, 212, 0.02);">
-                        <span style="font-size: 22pt !important color: var(--text-muted); font-weight: 800; text-transform: uppercase;">Luyện tập</span>
-                        <p style="font-size: 22pt !important font-weight: 700; color: #FFF; margin-top: 5px;">Cùng nhau ráp nói cuốn chiếu liên tục ngay lập tức!</p>
+                        <span style="font-size: 22pt !important; color: var(--text-muted); font-weight: 800; text-transform: uppercase;">Luyện tập</span>
+                        <p style="font-size: 22pt !important; font-weight: 700; color: #FFF; margin-top: 5px;">Cùng nhau ráp nói cuốn chiếu liên tục ngay lập tức!</p>
                     </div>
                     <button class="btn btn-cyan" onclick="navigateToSlide(17)" style="padding: 12px; font-weight: 800; font-size: 22pt !important">LÊN SÀN THUYẾT TRÌNH BÙNG NỔ <i class="fa-solid fa-arrow-right"></i></button>
                 </div>
@@ -920,9 +945,9 @@
             </div>
             <div class="timer-layout" style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px; margin-top: 20px;">
                 <div class="instructions-card glass-panel" style="padding: 30px; border-radius: 16px; border: 1.5px solid var(--glass-border); background: rgba(15, 23, 42, 0.4); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
-                    <div style="font-size: 46pt !important color: var(--cyan); margin-bottom: 15px;"><i class="fa-solid fa-microphone"></i></div>
-                    <h3 style="font-size: 28pt !important color: #FFF; font-weight: 800; margin-bottom: 10px;">SÂN KHẤU TRUYỀN THÔNG</h3>
-                    <p style="font-size: 24pt !important font-weight: 600; color: var(--text-muted);">Các nhóm tự tin bước lên bục giảng thực hiện tuyên truyền trước toàn lớp.</p>
+                    <div style="font-size: 46pt !important; color: var(--cyan); margin-bottom: 15px;"><i class="fa-solid fa-microphone"></i></div>
+                    <h3 style="font-size: 28pt !important; color: #FFF; font-weight: 800; margin-bottom: 10px;">SÂN KHẤU TRUYỀN THÔNG</h3>
+                    <p style="font-size: 24pt !important; font-weight: 600; color: var(--text-muted);">Các nhóm tự tin bước lên bục giảng thực hiện tuyên truyền trước toàn lớp.</p>
                 </div>
                 <div style="display: flex; flex-direction: column; justify-content: space-between; padding: 10px 0;">
                     <div class="timer-widget" id="timer-s17" data-duration="90">
@@ -935,8 +960,8 @@
                         </div>
                     </div>
                     <div class="action-card glass-panel" style="padding: 20px; border-radius: 12px; border: 1px solid var(--glass-border); text-align: center; margin-bottom: 15px; background: rgba(6, 182, 212, 0.02);">
-                        <span style="font-size: 22pt !important color: var(--text-muted); font-weight: 800; text-transform: uppercase;">Thuyết trình</span>
-                        <p style="font-size: 22pt !important font-weight: 700; color: #FFF; margin-top: 5px;">Mỗi nhóm có tối đa 1 phút 30 giây để hoàn thành!</p>
+                        <span style="font-size: 22pt !important; color: var(--text-muted); font-weight: 800; text-transform: uppercase;">Thuyết trình</span>
+                        <p style="font-size: 22pt !important; font-weight: 700; color: #FFF; margin-top: 5px;">Mỗi nhóm có tối đa 1 phút 30 giây để hoàn thành!</p>
                     </div>
                     <button class="btn btn-cyan" onclick="navigateToSlide(18)" style="padding: 12px; font-weight: 800; font-size: 22pt !important">VIẾT NHẬT KÝ TỰ SOI CHIẾU <i class="fa-solid fa-arrow-right"></i></button>
                 </div>
@@ -957,8 +982,8 @@
             </div>
             <div class="timer-layout" style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px; margin-top: 20px;">
                 <div class="instructions-card glass-panel" style="padding: 30px; border-radius: 16px; border: 1.5px solid var(--glass-border); background: rgba(15, 23, 42, 0.4);">
-                    <h3 style="font-size: 28pt !important color: var(--cyan); font-weight: 800; margin-bottom: 15px;"><i class="fa-solid fa-pen-fancy"></i> CÂU HỎI SUY NGẪM CÁ NHÂN:</h3>
-                    <div style="display: flex; flex-direction: column; gap: 20px; font-size: 24pt !important font-weight: 600; line-height: 1.6; color: #FFF;">
+                    <h3 style="font-size: 28pt !important; color: var(--cyan); font-weight: 800; margin-bottom: 15px;"><i class="fa-solid fa-pen-fancy"></i> CÂU HỎI SUY NGẪM CÁ NHÂN:</h3>
+                    <div style="display: flex; flex-direction: column; gap: 20px; font-size: 24pt !important; font-weight: 600; line-height: 1.6; color: #FFF;">
                         <div>
                             <strong style="color: var(--cyan);">📝 Câu hỏi 1:</strong><br>
                             Sau khi tuyên truyền, em thấy mình đã thực sự làm chủ kiến thức tuổi dậy thì chưa?
@@ -980,8 +1005,8 @@
                         </div>
                     </div>
                     <div class="action-card glass-panel" style="padding: 20px; border-radius: 12px; border: 1px solid var(--glass-border); text-align: center; margin-bottom: 15px; background: rgba(6, 182, 212, 0.02);">
-                        <span style="font-size: 22pt !important color: var(--text-muted); font-weight: 800; text-transform: uppercase;">Viết nhật ký</span>
-                        <p style="font-size: 22pt !important font-weight: 700; color: #FFF; margin-top: 5px;">Viết chân thực suy ngẫm vào phiếu cá nhân.</p>
+                        <span style="font-size: 22pt !important; color: var(--text-muted); font-weight: 800; text-transform: uppercase;">Viết nhật ký</span>
+                        <p style="font-size: 22pt !important; font-weight: 700; color: #FFF; margin-top: 5px;">Viết chân thực suy ngẫm vào phiếu cá nhân.</p>
                     </div>
                     <button class="btn btn-cyan" onclick="navigateToSlide(19)" style="padding: 12px; font-weight: 800; font-size: 22pt !important">THỰC HIỆN NGHI THỨC TUYÊN THỆ <i class="fa-solid fa-arrow-right"></i></button>
                 </div>
@@ -1002,9 +1027,9 @@
             </div>
             <div class="pledge-layout" style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 30px; margin-top: 20px;">
                 <div class="pledge-checklist glass-panel" style="padding: 25px; border-radius: 16px; border: 1.5px solid var(--glass-border); background: rgba(15, 23, 42, 0.4);">
-                    <h3 style="font-size: 22pt !important color: var(--cyan); font-weight: 800; margin-bottom: 15px;"><i class="fa-solid fa-square-check"></i> VIỆC CẦN LÀM MỖI NGÀY:</h3>
+                    <h3 style="font-size: 22pt !important; color: var(--cyan); font-weight: 800; margin-bottom: 15px;"><i class="fa-solid fa-square-check"></i> VIỆC CẦN LÀM MỖI NGÀY:</h3>
                     
-                    <div style="display: flex; flex-direction: column; gap: 15px; font-size: 24pt !important font-weight: 700; color: #FFF;">
+                    <div style="display: flex; flex-direction: column; gap: 15px; font-size: 24pt !important; font-weight: 700; color: #FFF;">
                         <label class="check-label" style="display: flex; align-items: center; gap: 15px; cursor: pointer;">
                             <input type="checkbox" class="pledge-checkbox" id="chk-1" style="width: 24px; height: 24px; accent-color: var(--cyan);">
                             <span>Rửa mặt bằng sữa rửa mặt dịu nhẹ hằng ngày.</span>
@@ -1025,17 +1050,17 @@
                 </div>
                 
                 <div class="certification-zone glass-panel" style="padding: 25px; border-radius: 16px; border: 2px dashed rgba(255,255,255,0.1); background: rgba(15, 23, 42, 0.4); display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 250px; text-align: center; position: relative; overflow: hidden;">
-                    <div id="pledge-stamp" style="font-size: 60pt !important color: rgba(255, 255, 255, 0.05); transition: all 0.5s ease;">
+                    <div id="pledge-stamp" style="font-size: 60pt !important; color: rgba(255, 255, 255, 0.05); transition: all 0.5s ease;">
                         <i class="fa-solid fa-award"></i>
                     </div>
                     <div id="pledge-congrats" style="display: none; animation: fadeIn 0.8s ease;">
-                        <h4 style="font-size: 22pt !important color: var(--cyan); font-weight: 800; text-transform: uppercase;">BÁC SĨ NOVASTARS CHÍNH THỨC</h4>
-                        <p style="font-size: 24pt !important color: #FFF; font-weight: 700; margin-top: 10px;">Đã hoàn thành xuất sắc khóa đào tạo lâm sàng!</p>
-                        <div style="font-size: 28pt !important color: var(--amber); font-weight: 900; margin-top: 15px; text-shadow: 0 0 10px rgba(245,158,11,0.3);">
+                        <h4 style="font-size: 22pt !important; color: var(--cyan); font-weight: 800; text-transform: uppercase;">BÁC SĨ NOVASTARS CHÍNH THỨC</h4>
+                        <p style="font-size: 24pt !important; color: #FFF; font-weight: 700; margin-top: 10px;">Đã hoàn thành xuất sắc khóa đào tạo lâm sàng!</p>
+                        <div style="font-size: 28pt !important; color: var(--amber); font-weight: 900; margin-top: 15px; text-shadow: 0 0 10px rgba(245,158,11,0.3);">
                             Khỏe mạnh - Tự tin - Sạch thơm bước tới!
                         </div>
                     </div>
-                    <div id="pledge-pending" style="font-size: 22pt !important color: var(--text-muted); font-weight: 800; text-transform: uppercase; margin-top: 10px;">
+                    <div id="pledge-pending" style="font-size: 22pt !important; color: var(--text-muted); font-weight: 800; text-transform: uppercase; margin-top: 10px;">
                         (Tích chọn tất cả 4 ô cam kết để đóng dấu sứ mệnh!)
                     </div>
                 </div>
